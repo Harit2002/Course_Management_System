@@ -3,14 +3,14 @@ package com.Model;
 public class Course {
 	private int courseid;
 	private String coursename;
-	private int fee;
+	private String fee;
 	private String courseDesc;
 	
 	public Course() {
 		super();
 	}
 	
-	public Course(int courseid, String coursename, int fee, String courseDesc) {
+	public Course(int courseid, String coursename, String fee, String courseDesc) {
 		super();
 		this.courseid = courseid;
 		this.coursename = coursename;
@@ -34,11 +34,11 @@ public class Course {
 		this.coursename = coursename;
 	}
 
-	public int getFee() {
+	public String getFee() {
 		return fee;
 	}
 
-	public void setFee(int fee) {
+	public void setFee(String fee) {
 		this.fee = fee;
 	}
 

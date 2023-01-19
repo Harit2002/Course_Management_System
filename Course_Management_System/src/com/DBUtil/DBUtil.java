@@ -4,10 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.Model.Course;
 
 public class DBUtil {
-	public Connection provideConnection(Course course) {
+	public static Connection provideConnection() {
 		Connection conn = null;
 		
 		 try {
