@@ -1,13 +1,13 @@
 package com.Model;
 
-import java.sql.Date;
+
 
 public class Batch {
 	private int BatchID;
 	private int courseID;
 	private int facultyID;
 	private int studentCount;
-	private Date batchStartDate;
+	private String batchStartDate;
 	private String duration;
 	
 	
@@ -15,7 +15,7 @@ public class Batch {
 		super();
 	}
 
-	public Batch(int batchID, int courseID, int facultyID, int studentCount, Date batchStartDate, String duration) {
+	public Batch(int batchID, int courseID, int facultyID, int studentCount, String batchStartDate, String duration) {
 		super();
 		BatchID = batchID;
 		this.courseID = courseID;
@@ -57,12 +57,12 @@ public class Batch {
 		this.studentCount = studentCount;
 	}
 
-	public Date getBatchStartDate() {
+	public String getBatchStartDate() {
 		return batchStartDate;
 	}
 
-	public void setBatchStartDate(Date batchStartDate) {
-		this.batchStartDate = batchStartDate;
+	public void setBatchStartDate(String startDate) {
+		this.batchStartDate = startDate;
 	}
 
 	public String getDuration() {
