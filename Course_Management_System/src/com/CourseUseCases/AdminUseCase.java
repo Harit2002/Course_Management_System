@@ -2,6 +2,8 @@ package com.CourseUseCases;
 
 
 import java.util.Scanner;
+
+import com.ConsoleColors.ConsoleColors;
 import com.CourseDao.AdminDao;
 import com.CourseDao.AdminDaoImpl;
 import com.Model.Batch;
@@ -9,6 +11,43 @@ import com.Model.Batch;
 
 public class AdminUseCase {
 	
+	public static void main(String[] args) {
+		Main();
+	}
+	public static void Main() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print(ConsoleColors.GREEN_BOLD+
+				 "+==========================================+"+"\n"
+				+"|         Welcome to Admin Section         |"+"\n"
+				+"+==========================================+"+"\n"
+				+"|                                          |"+"\n"
+				+"|  1. Register new Admin                   |"+"\n"
+				+"|  2. Create, read, update course          |"+"\n"
+				+"|  3. Create, read, update batch           |"+"\n"
+				+"|  4. Create, read, update faculty         |"+"\n"
+				+"|  5. Create, read, update Course plan     |"+"\n"
+				+"|  6. Allocate faculty to batch            |"+"\n"
+				+"|  7. Back to main menu                    |"+"\n"
+				+"|  8. Exit                                 |"+"\n"
+				+"|                                          |"+"\n"
+				+"+==========================================+"+"\n"
+				+ConsoleColors.RESET
+				);
+		String out = sc.next();
+		
+		while(true) {
+			if(out.equals("1")) {
+				
+			}
+			else {
+				break;
+			}
+		}
+		
+		sc.close();
+		
+	}
 	
 	public static void CreateBatch() {
 		Scanner sc = new Scanner(System.in);
