@@ -7,7 +7,7 @@ import java.util.Date;
 import com.Exception.*;
 import com.DBUtil.DBUtil;
 import com.Model.*;
-import com.mysql.cj.protocol.Resultset;
+
 
 public class AdminDaoImpl implements AdminDao{
 
@@ -44,7 +44,7 @@ public class AdminDaoImpl implements AdminDao{
 	
 	@Override
 	public String signUp(String userName, String pwd) {
-		String res = "Invalid id or password";
+		String res = "Invalid Admin id or password";
 		
 		
 
@@ -106,13 +106,7 @@ public class AdminDaoImpl implements AdminDao{
 		return res;
 	}
 
-	@Override
-	public int updateCourse(int courseID) {
-   
-			
-		
-		return 0;
-	}
+
 
 	@Override
 	public Course viewCourse(int courseID) {
@@ -185,11 +179,6 @@ public class AdminDaoImpl implements AdminDao{
 		return res;
 	}
 
-	@Override
-	public int updateBatch(int BatchID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public Batch viewBatch(int BatchID) {
@@ -222,7 +211,8 @@ public class AdminDaoImpl implements AdminDao{
 			
 			  }
 			else throw new AdminException();
-			}
+			
+		}
 			
                
           catch (Exception e) { 
@@ -235,45 +225,365 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public String createFaculty(Faculty faculty) {
-		// TODO Auto-generated method stub
-		return null;
+	String res = "Invalid faculty details";
+		
+		
+
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("insert into faculty(faculyName, facultyAddress, mobile, userName, password) values(?,?,?,?,?)");
+			
+
+			ps.setString(1, faculty.getFacultyName() );
+			ps.setString(2, faculty.getAddress() );
+			ps.setString(3, faculty.getMobile());
+			ps.setString(4, faculty.getUserName());
+			ps.setString(5, faculty.getPassword());
+			
+			int x = ps.executeUpdate();
+			
+			
+			if(x > 0)
+				
+				res = faculty.getFacultyName()+" succesfully created";
+	
+	    	} 
+               
+          catch (Exception e) { 
+                  System.out.println(e.getMessage()); 
+			
+          }
+		
+		return res;
 	}
 
-	@Override
-	public int updateFaculty(int FacultyID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	public Faculty viewFaculty(int FacultyID) {
-		// TODO Auto-generated method stub
-		return null;
+		Faculty faculty = new Faculty();
+		
+		
+
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("select * from faculty where batchID=?");
+			ps.setInt(1, FacultyID);
+			
+			
+			ResultSet result = ps.executeQuery();
+			
+			if(result.next()) {
+			int fID = result.getInt("facultyID");
+			faculty.setFacultyID(fID);;
+			
+			String facName  = result.getString("facultyName");
+			faculty.setFacultyName(facName);
+			
+			String facAdd = result.getString("facultyAddress");
+			faculty.setAddress(facAdd);
+			
+			String mobile = result.getString("mobil");
+			faculty.setMobile(mobile);
+			
+			String uName = result.getString("userName");
+			faculty.setUserName(uName);
+			
+			String pwd = result.getString("password");
+			faculty.setPassword(pwd);
+			
+			
+			  }
+			else throw new AdminException();
+			}
+			
+               
+          catch (Exception e) { 
+                  System.out.println(e.getMessage()); 
+			
+          }
+
+		return faculty;
 	}
 
 	@Override
-	public String allocateFacultyToBatch() {
-		// TODO Auto-generated method stub
-		return null;
+	public String allocateFacultyToBatch(int BatchID, int facultyId) {
+		
+		String res = "Invalid batch/faculty details";
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE batch SET facultyID = ? where batchID=?");
+			
+			ps.setInt(1, facultyId);
+			ps.setInt(2, BatchID);
+			
+			
+			int x = ps.executeUpdate();
+			
+			if(x > 0)
+				res = facultyId+" Faculty  succesfully allocated to Batch";
+			
+			}
+			
+               
+          catch (Exception e) { 
+                  System.out.println(e.getMessage()); 
+			
+          }
+		
+		
+		return res;
 	}
 
 	@Override
 	public String createCoursePlan(CoursePlan plan) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		String res = "Invalid course details";
+		
+		
 
-	@Override
-	public int updateCoursePlan(int PlanID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("insert into course(batchId, daynumber, topic, status) values(?,?,?,?)");
+			
 
+			ps.setInt(1, plan.getBatchID() );
+			ps.setInt(2, plan.getDayNumber());
+			ps.setString(3, plan.getTopic());
+			ps.setString(4, plan.getStatus());
+
+			
+			int x = ps.executeUpdate();
+			
+			
+			if(x > 0)
+				
+				res = plan.getTopic()+" succesfully created";
+	
+	    	} 
+               
+          catch (Exception e) { 
+                  System.out.println(e.getMessage()); 
+			
+          }
+		
+		return res;
+	}
+    
 	@Override
 	public CoursePlan viewCoursePlan(int PlanID) {
+		CoursePlan plan = new CoursePlan();
+		
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("select * from CoursePlan PlanID=?");
+			ps.setInt(1, PlanID);
+			
+			
+			ResultSet result = ps.executeQuery();
+			
+			if(result.next()) {
+			
+				int planID = result.getInt("planId");
+				plan.setPlanID(planID);
+				
+				int bID = result.getInt("batchId");
+				plan.setBatchID(bID);
+				
+				int dCount = result.getInt("dayNumber");
+				plan.setDayNumber(dCount);
+				
+				String topic = result.getString("topic");
+				plan.setTopic(topic);
+				
+				String status = result.getString("status");
+				plan.setStatus(status);
+			
+			  }
+			else throw new AdminException();
+			}
+			
+               
+          catch (Exception e) { 
+                  System.out.println(e.getMessage()); 
+			
+          }
+
+		return plan;
+	}
+
+	
+	
+	//<---=============== Update course info ===============--->
+	
+	@Override
+	public String updateCourseName(int courseID, String newName) {
+		
+		String res = "Error occured";
+		
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE Course SET course_name = ? WHERE courseID = ? ");
+			
+			ps.setString(1, newName);
+			ps.setInt(2, courseID);
+			
+			int x = ps.executeUpdate();
+			
+			if(x > 0) 
+				res = "Course name updated to "+newName;
+			}
+			
+               
+          catch (Exception e) { 
+                  System.out.println(e.getMessage()); 
+			
+          }
+
+		return res;
+	}
+
+	@Override
+	public String updateCourseFee(int courseID, String newFee) {
+		String res = "Error occured";
+		
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE Course SET fee = ? WHERE courseID = ? ");
+			
+			ps.setString(1, newFee);
+			ps.setInt(2, courseID);
+			
+			int x = ps.executeUpdate();
+			
+			if(x > 0) 
+				res = "Course fee updated to "+newFee;
+			}
+			
+               
+          catch (Exception e) { 
+                  System.out.println(e.getMessage()); 
+			
+          }
+
+		return res;
+	}
+
+	@Override
+	public String updateCourseDesc(int courseID, String newDesc) throws AdminException {
+		String res = "Error occured";
+		
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE Course SET course_desc = ? WHERE courseID = ? ");
+			
+			ps.setString(1, newDesc);
+			ps.setInt(2, courseID);
+			
+			int x = ps.executeUpdate();
+			
+			if(x > 0) 
+				res = "Course description updated to "+newDesc;
+			}
+			
+               
+          catch (Exception e) { 
+                  
+        	  throw new AdminException(e.getMessage()); 
+			
+          }
+
+		return res;
+	}
+
+	@Override
+	public String updateBatchFaculty(int BatchID, int facultyID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String updateBatchStudentCount(int BatchID, int newStudCount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateBatchStartDate(int BatchID, String newDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateBatchDuration(int BatchID, String newDuration) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateFacultyName(int FacultyID, String newName, String pwd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateFacultyAddress(int FacultyID, String newAddress, String pwd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateFacultyMobile(int FacultyID, String newNumber, String pwd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateFacultyEmail(int FacultyID, String newMail, String pwd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateFacultyUserName(int FacultyID, String newUser, String pwd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateFacultyPasword(int FacultyID, String newPwd, String pwd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateCourseBatchId(int PlanID, int BatchID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateCourseDay(int PlanID, int day) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateCourseTopic(int PlanID, int topic) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateCourseStatus(int PlanID, int status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 }

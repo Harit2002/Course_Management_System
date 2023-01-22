@@ -2,6 +2,7 @@ package com.Main;
 
 import java.util.Scanner;
 
+import com.ConsoleColors.ConsoleColors;
 import com.CourseUseCases.AdminUseCase;
 
 public class Main {
@@ -12,34 +13,27 @@ public class Main {
 		
 		
 		
-		System.out.println("Welcome to Course Management System ");
-		System.out.println("====================================\n");
+		
 		
 		while(true) {
-			System.out.print(
-							"+-----------------------------+"+"\n"+
-							 "| 1. Login as Admin		    |"+"\n"
-							+"| 2. Login/SignUp as  Faculty |"+"\n"
-							+"| 3. Exit                     |"+"\n"
-							+"+-----------------------------+"
+			System.out.print(ConsoleColors.GREEN_BOLD+
+					 		 "+========================================+"+"\n"
+					 	    +"|  Welcome to  Course Management System  |"+"\n"
+					 	    +"+========================================+"+"\n"
+					        +"|                                        |"+"\n"
+							+"|  1. Login as Admin                     |"+"\n"
+							+"|  2. Login/SignUp as  Faculty           |"+"\n"
+							+"|  3. Exit                               |"+"\n"
+							+"|                                        |"+"\n"
+							+"+========================================+"+"\n"
+							+ConsoleColors.RESET
 							);
 			String out = sc.next();
 			
 			
 			
 			if(out.equals("1")) {
-				System.out.print(
-						"+-------------------------------------+"+"\n"+
-						 "| 1. Add another Admin	            |"+"\n"
-						+"| 2. Create, read, update course      |"+"\n"
-						+"| 3. Create, read, update batch       |"+"\n"
-						+"| 4. Create, read, update faculty	   	|"+"\n"
-						+"| 5. Create, read, update Course plan	|"+"\n"
-						+"| 6. Allocate faculty to batch 		|"+"\n"
-						+"| 7. Back to main menu          		|"+"\n"
-						+"| 7. Exit				          		|"+"\n"
-						+"+-------------------------------------+"
-						);
+				
 				
 				if(out.equals("1"))
 		   		 AdminUseCase.AdminLogin();
@@ -49,8 +43,20 @@ public class Main {
 			
 			
 			
-			else if(out.equals("2")) {
+			else if(out.equals("2")) {				
 				
+				System.out.print(ConsoleColors.GREEN_BOLD+
+						 		 "+======================================+"+"\n"
+						 		+"|      Welcome to Faculty Section      |"+"\n"
+						 		+"+======================================+"+"\n"
+						        +"|                                      |"+"\n"
+								+"|  1. Login as Faculty                 |"+"\n"
+								+"|  2. SignUp as  Faculty               |"+"\n"
+								+"|  3. Go back to main menu             |"+"\n"
+								+"|                                      |"+"\n"
+								+"+======================================+"+"\n"
+								+ConsoleColors.RESET
+								);
 				
 		   		 break;
 		   	 }
