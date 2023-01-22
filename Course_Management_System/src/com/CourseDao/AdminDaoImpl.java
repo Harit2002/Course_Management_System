@@ -501,21 +501,87 @@ public class AdminDaoImpl implements AdminDao{
 	}
 
 	@Override
-	public String updateBatchFaculty(int BatchID, int facultyID) {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateBatchFaculty(int BatchID, int facultyID) throws AdminException {
+		String res = "Error occured";
+		
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE Course SET facultyId = ? WHERE batchID = ? ");
+			
+			ps.setInt(1, facultyID);
+			ps.setInt(2, BatchID);
+			
+			int x = ps.executeUpdate();
+			
+			if(x > 0) 
+				res = "Batch faculty updated to "+facultyID;
+			}
+			
+               
+          catch (Exception e) { 
+                  
+        	  throw new AdminException(e.getMessage()); 
+			
+          }
+
+		return res;
 	}
 
 	@Override
-	public String updateBatchStudentCount(int BatchID, int newStudCount) {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateBatchStudentCount(int BatchID, int newStudCount) throws AdminException {
+		String res = "Error occured";
+		
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE Course SET total_stud = ? WHERE batchID = ? ");
+			
+			ps.setInt(1, newStudCount);
+			ps.setInt(2, BatchID);
+			
+			int x = ps.executeUpdate();
+			
+			if(x > 0) 
+				res = "Batch Count updated to "+newStudCount;
+			}
+			
+               
+          catch (Exception e) { 
+                  
+        	  throw new AdminException(e.getMessage()); 
+			
+          }
+
+		return res;
 	}
 
 	@Override
-	public String updateBatchStartDate(int BatchID, String newDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateBatchStartDate(int BatchID, String newDate) throws AdminException{
+		String res = "Error occured";
+		
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE Course SET start_Date = ? WHERE batchID = ? ");
+			
+			ps.setString(1, newDate);
+			ps.setInt(2, BatchID);
+			
+			int x = ps.executeUpdate();
+			
+			if(x > 0) 
+				res = "Batch start date updated to "+newDate;
+			}
+			
+               
+          catch (Exception e) { 
+                  
+        	  throw new AdminException(e.getMessage()); 
+			
+          }
+
+		return res;
 	}
 
 	@Override
