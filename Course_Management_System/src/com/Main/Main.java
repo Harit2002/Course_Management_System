@@ -4,15 +4,16 @@ import java.util.Scanner;
 
 import com.ConsoleColors.ConsoleColors;
 import com.CourseUseCases.AdminUseCase;
+import com.Exception.AdminException;
 
 public class Main {
+	static Scanner sc = new Scanner(System.in);
+	
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		
-		
-		
-		
-		
+		Main1();
+	}
+	
+	public static void Main1() {
 		
 		
 		while(true) {
@@ -26,24 +27,22 @@ public class Main {
 							+"|  3. Exit                               |"+"\n"
 							+"|                                        |"+"\n"
 							+"+========================================+"+"\n"
-							+ConsoleColors.RESET
-							);
+							+ConsoleColors.RESET);
+			
 			String out = sc.next();
 			
-			
-			
+						
 			if(out.equals("1")) {
-				
-				
-				if(out.equals("1"))
-		   		 AdminUseCase.AdminLogin();
-		   	 }
+	
+		   		 try {
+					AdminUseCase.AdminLogin();
+				} catch (AdminException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		   	 }		
 			
-			
-			
-			
-			
-			else if(out.equals("2")) {				
+			else if(out.equals("2")) {		
 				
 				System.out.print(ConsoleColors.GREEN_BOLD+
 						 		 "+======================================+"+"\n"
@@ -57,18 +56,34 @@ public class Main {
 								+"+======================================+"+"\n"
 								+ConsoleColors.RESET
 								);
+				out = sc.next();
 				
-		   		 break;
+				while(true) {
+					if(out.equals("1")) {
+						Main.main(null);
+						Main1();
+					}
+					
+					else if(out.equals("2")) {
+						
+					}
+					else if(out.equals("3")) {
+						Main1();
+						break;
+					}
+					else System.out.println(ConsoleColors.RED_BACKGROUND+"Invalid Selection !!!"+ConsoleColors.RESET);
+					
+				} 
 		   	 }
 			
 		   	else if(out.equals("3")) {
 			    
-			    		System.out.println("Exited...");
+			    		System.out.println(ConsoleColors.RED_BOLD+"Exited..."+ConsoleColors.RESET);
 			    		break;
 		   	 }
 			
 		   	 else {
-		   		 System.out.println("!!!Invalid selection!!!");
+		   		 System.out.println(ConsoleColors.RED_BACKGROUND+"!!!Invalid selection!!!"+ConsoleColors.RESET);
 		   		 continue;
 		   	 }
 		}
