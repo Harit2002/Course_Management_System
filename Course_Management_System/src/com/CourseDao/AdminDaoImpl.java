@@ -60,7 +60,7 @@ public class AdminDaoImpl implements AdminDao{
 			
 			if(x > 0)
 				
-				res ="admin succesfully registered";
+				res =userName+" succesfully registered as admin";
 	
 	    	} 
                
@@ -82,7 +82,7 @@ public class AdminDaoImpl implements AdminDao{
 
 		try (Connection conn = DBUtil.provideConnection()){
 			
-			PreparedStatement ps = conn.prepareStatement("insert into course values(?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("insert into course(course_name, fee, course_desc) values(?,?,?)");
 			
 
 			ps.setString(1, course.getCoursename());
@@ -94,7 +94,7 @@ public class AdminDaoImpl implements AdminDao{
 			
 			if(x > 0)
 				
-				res = course.getCourseid()+" succesfully created";
+				res = course.getCoursename()+" course succesfully created";
 	
 	    	} 
                
@@ -110,30 +110,33 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Override
 	public Course viewCourse(int courseID) {
+		
 		Course course = new Course();
 		
 		
 
 		try (Connection conn = DBUtil.provideConnection()){
 			
-			PreparedStatement ps = conn.prepareStatement("select * from course where courseId=?");
+			PreparedStatement ps = conn.prepareStatement("select * from course where course_Id=?");
 			ps.setInt(1, courseID);
 			
 			
 			ResultSet result = ps.executeQuery();
 			
-			int cID = result.getInt("course_ID");
-			course.setCourseid(cID);
+			if(result.next()) {
 			
-			String cName = result.getString("cours_Name");
-			course.setCoursename(cName);
-			
-			String fee = result.getString("fee");
-			course.setFee(fee);
-			
-			String course_desc = result.getString("course_desc");
-			course.setCourseDesc(course_desc);
-			
+				int cID = result.getInt("course_ID");
+				course.setCourseid(cID);
+				
+				String cName = result.getString("course_Name");
+				course.setCoursename(cName);
+				
+				String fee = result.getString("fee");
+				course.setFee(fee);
+				
+				String course_desc = result.getString("course_desc");
+				course.setCourseDesc(course_desc);
+			 }
 			}
 			
                
@@ -167,7 +170,7 @@ public class AdminDaoImpl implements AdminDao{
 			
 			if(x > 0)
 				
-				res = batch.getBatchID()+" batch ID succesfully created";
+				res = " Batch succesfully created";
 	
 	    	} 
                
