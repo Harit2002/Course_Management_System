@@ -81,5 +81,11 @@ public class Faculty {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "{facultyID :" + facultyID + ", facultyName :" + facultyName + ", address :" + address + ", mobile:"
+				+ mobile + ", email :" + email + ", userName :" + userName + ", password :" + password + "]\n";
+	}
 	
 }

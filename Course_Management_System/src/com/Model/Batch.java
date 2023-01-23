@@ -72,6 +72,12 @@ public class Batch {
 	public void setDuration(String duration) {
 		this.duration = duration;
 	}
+
+	@Override
+	public String toString() {
+		return "{BatchID :" + BatchID + ", courseID :" + courseID + ", facultyID :" + facultyID + ", studentCount :"
+				+ studentCount + ", batchStartDate :" + batchStartDate + ", duration :" + duration + "}\n";
+	}
 	
 	
 }

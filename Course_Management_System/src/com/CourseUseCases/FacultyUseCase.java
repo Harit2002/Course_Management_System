@@ -4,16 +4,18 @@ import java.util.Scanner;
 import com.ConsoleColors.ConsoleColors;
 import com.CourseDao.FaculityDao;
 import com.CourseDao.FaculityDaoImpl;
+import com.Main.Main;
 
 public class FacultyUseCase {
+	static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		Login();
+		FacultyFunctionality();
 	}
 	
 	public static void FacultyFunctionality() {
 		
-		Scanner sc = new Scanner(System.in);
+		
 		
 		System.out.print(ConsoleColors.GREEN_BOLD+
 		 		 "+======================================+"+"\n"
@@ -32,10 +34,17 @@ public class FacultyUseCase {
 		String out = sc.next();
 		
 		while(true) {
-			if(out.equals("1")) {
+			if(out.equals("1")) ViewCourse();;
+			
+			if(out.equals("2")) ;
+			
+			if(out.equals("3")) ;
 				
-			}
+			
 			else if(out.equals("4")) {
+				
+				Main.Main1();
+				sc.close();
 				break;
 			}
 			else {
@@ -43,17 +52,16 @@ public class FacultyUseCase {
 				FacultyFunctionality();
 			}
 		}
-		sc.close();
+		
 	}
 	public static void Login() {
+			
 		
-		Scanner sc = new Scanner(System.in);
-		
+		System.out.println(ConsoleColors.YELLOW_BOLD + "Enter faculty name" + ConsoleColors.RESET);
 		String name = sc.next();
 		
+		System.out.println(ConsoleColors.YELLOW_BOLD + "Enter password" + ConsoleColors.RESET);
 		String pwd = sc.next();
-		
-		sc.close();
 		
 		FaculityDao faculity = new FaculityDaoImpl();
 		
@@ -64,4 +72,36 @@ public class FacultyUseCase {
 		FacultyFunctionality();
 		
 	}
+	
+	public static void ViewCourse() {
+		
+		FaculityDao faculity = new FaculityDaoImpl();
+		
+		System.out.println(ConsoleColors.YELLOW_BOLD + "Enter facultyID" + ConsoleColors.RESET);
+		
+		faculity.coursePlan(sc.nextInt());
+		
+		FacultyFunctionality();
+	}
+	
+	public static void UpdatePwd() {
+		FaculityDao faculity = new FaculityDaoImpl();
+		
+		System.out.println(ConsoleColors.YELLOW_BOLD + "Enter faculty User Name" + ConsoleColors.RESET);
+		String user = sc.next();
+		
+		System.out.println();
+		String current = sc.next(ConsoleColors.YELLOW_BOLD + "Enter Current Password" + ConsoleColors.RESET);
+		
+		System.out.println(ConsoleColors.YELLOW_BOLD + "Enter New Password" + ConsoleColors.RESET);
+		String newPwd = sc.next();
+		
+		String res = faculity.updatePassword(user, newPwd, current);
+		
+		System.out.println(ConsoleColors.GREEN_BACKGROUND + res + ConsoleColors.RESET);
+		
+		FacultyFunctionality();
+		
+	}
+	
 }

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.ConsoleColors.ConsoleColors;
 import com.CourseUseCases.AdminUseCase;
+import com.CourseUseCases.FacultyUseCase;
 import com.Exception.AdminException;
 
 public class Main {
@@ -33,62 +34,31 @@ public class Main {
 			
 						
 			if(out.equals("1")) {
-	
-		   		 try {
+				
+				try {
 					AdminUseCase.AdminLogin();
 				} catch (AdminException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		   	 }		
+			}
+		   	 		
 			
-			else if(out.equals("2")) {		
+			else if(out.equals("2")) FacultyUseCase.Login();		
 				
-				System.out.print(ConsoleColors.GREEN_BOLD+
-						 		 "+======================================+"+"\n"
-						 		+"|      Welcome to Faculty Section      |"+"\n"
-						 		+"+======================================+"+"\n"
-						        +"|                                      |"+"\n"
-								+"|  1. Login as Faculty                 |"+"\n"
-								+"|  2. SignUp as  Faculty               |"+"\n"
-								+"|  3. Go back to main menu             |"+"\n"
-								+"|                                      |"+"\n"
-								+"+======================================+"+"\n"
-								+ConsoleColors.RESET
-								);
-				out = sc.next();
-				
-				while(true) {
-					if(out.equals("1")) {
-						Main.main(null);
-						Main1();
-					}
-					
-					else if(out.equals("2")) {
-						
-					}
-					else if(out.equals("3")) {
-						Main1();
-						break;
-					}
-					else System.out.println(ConsoleColors.RED_BACKGROUND+"Invalid Selection !!!"+ConsoleColors.RESET);
-					
-				} 
-		   	 }
 			
 		   	else if(out.equals("3")) {
 			    
-			    		System.out.println(ConsoleColors.RED_BOLD+"Exited..."+ConsoleColors.RESET);
+			    		System.out.println(ConsoleColors.GREEN_BACKGROUND+"Thank you for visiting..."+ConsoleColors.RESET);
+			    		sc.close();
 			    		break;
 		   	 }
 			
 		   	 else {
 		   		 System.out.println(ConsoleColors.RED_BACKGROUND+"!!!Invalid selection!!!"+ConsoleColors.RESET);
-		   		 continue;
+		   		 Main1();
 		   	 }
 		}
-		
-		sc.close();
 		
 	}
 }

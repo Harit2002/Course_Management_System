@@ -1,6 +1,7 @@
 package com.Model;
 
 public class Course {
+
 	private int courseid;
 	private String coursename;
 	private String fee;
@@ -50,4 +51,10 @@ public class Course {
 		this.courseDesc = courseDesc;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "{courseid :" + courseid + ", coursename :" + coursename + ", fee :" + fee + ", courseDesc :"
+				+ courseDesc + "}";
+	}
 }
