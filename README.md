@@ -1,7 +1,7 @@
 # Course Management System
+![image](https://user-images.githubusercontent.com/112626182/229760190-f9e68770-97fc-452f-a231-c82a80f93236.png)
 
-##### ![User Flow Diagram](https://lh5.googleusercontent.com/euBm66OHHjbLB_5wIV7YUExj_Jy-1jASYTpsmjeBk4cyNg-m3vW70E2MZ6czPS0-iAg=w2400)
-## ![ER-Diagram](https://lh4.googleusercontent.com/FsRLdaY0Kd9l2lLxo5ChkbWV4-JvsnJ5_r2LPzrgZ8fJS8d_A93LHfk30W_CDpHNpI8=w2400)
+ ![ER-Diagram](https://lh4.googleusercontent.com/FsRLdaY0Kd9l2lLxo5ChkbWV4-JvsnJ5_r2LPzrgZ8fJS8d_A93LHfk30W_CDpHNpI8=w2400)
 
 <p>In an educational  Institute there are several courses running parallel  every day. For every course there are several batches at same/different time. Every course has a session wise/day wise schedule. It will be difficult for the Faculty Head to know the status of every batch i.e what is the session taught at each day in a batch.
 
